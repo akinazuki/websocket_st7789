@@ -62,30 +62,31 @@ display.clear()
 server = WebsocketServer(websocket_port, host='0.0.0.0')
 
 def new_client(client, server):
-	print(client)
+	print("New Connection",client)
 
 def receive_message(client,server,message):
 	msg = json.loads(message)
 	if msg['method'] == 'picture':
 		img = BytesIO(base64.b64decode(msg['data']))
 		display.clear()
-		display.ShowImage(Image.open(img),0,0)
+		status = display.ShowImage(Image.open(img),0,0)
 		server.send_message(client, json.dumps({
 			'method': msg['method'],
-			'status': True
+			'status': status
 		}))
 	elif msg['method'] == 'clear':
-		display.clear()
+		status = display.clear()
 		server.send_message(client, json.dumps({
 			'method': msg['method'],
-			'status': True
+			'status': status
 		}))
 	elif msg['method'] == 'light':
-		display.backlight(msg['switch'])
+		status = display.backlight(msg['switch'])
 		server.send_message(client, json.dumps({
 			'method': msg['method'],
-			'status': True
+			'status': status
 		}))
+		
 
 def gpio_button_press_callback(KEY):
 	for x in keys:

@@ -28,13 +28,20 @@ class ST7789(object):
     def command(self, cmd):
         GPIO.output(self._dc, GPIO.LOW)
         self._spi.writebytes([cmd])
+        return True
 
     def data(self, val):
         GPIO.output(self._dc, GPIO.HIGH)
         self._spi.writebytes([val])
+        return True
 
     def backlight(self, status):
-        GPIO.output(self._bl, status)
+        try:
+            GPIO.output(self._bl, status)
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def Init(self):
         """Initialize dispaly"""    
@@ -115,6 +122,7 @@ class ST7789(object):
         self.command(0x11)
 
         self.command(0x29)
+        return True
 
     def reset(self):
         """Reset the display"""
@@ -124,6 +132,7 @@ class ST7789(object):
         time.sleep(0.01)
         GPIO.output(self._rst,GPIO.HIGH)
         time.sleep(0.01)
+        return True
         
     def SetWindows(self, Xstart, Ystart, Xend, Yend):
         #set the X coordinates
@@ -140,7 +149,8 @@ class ST7789(object):
         self.data(0x00)
         self.data((Yend - 1) & 0xff )
 
-        self.command(0x2C)    
+        self.command(0x2C)
+        return True
     
     def ShowImage(self,Image,Xstart,Ystart):
         """Set buffer to value of Python Imaging Library image."""
@@ -157,7 +167,9 @@ class ST7789(object):
         self.SetWindows ( 0, 0, self.width, self.height)
         GPIO.output(self._dc,GPIO.HIGH)
         for i in range(0,len(pix),4096):
-            self._spi.writebytes(pix[i:i+4096])		
+            self._spi.writebytes(pix[i:i+4096])
+
+        return True
         
     def clear(self):
         """Clear contents of image buffer"""
@@ -165,4 +177,5 @@ class ST7789(object):
         self.SetWindows ( 0, 0, self.width, self.height)
         GPIO.output(self._dc,GPIO.HIGH)
         for i in range(0,len(_buffer),4096):
-            self._spi.writebytes(_buffer[i:i+4096])		
+            self._spi.writebytes(_buffer[i:i+4096])
+        return True
