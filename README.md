@@ -1,10 +1,13 @@
 # websocket_st7789
 A Websocket Bridge of ST7789
 
-### Install
+### Install Library
 ```bash
 pip install websocket-server RPi.GPIO Pillow spidev numpy wiringpi
 ```
+
+### Install Runtime
+See https://gist.github.com/JdaieLin/9c38e0cc4c57247db505d8577d1bda79
 
 ### Usage
 ```bash
