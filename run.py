@@ -80,6 +80,12 @@ def receive_message(client,server,message):
 			'method': msg['method'],
 			'status': True
 		}))
+	elif msg['method'] == 'light':
+		display.backlight(msg['switch'])
+		server.send_message(client, json.dumps({
+			'method': msg['method'],
+			'status': True
+		}))
 
 def gpio_button_press_callback(KEY):
 	for x in keys:

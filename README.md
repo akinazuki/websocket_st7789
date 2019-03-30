@@ -54,6 +54,24 @@ python3 run.py
 ```
 ---
 
+#### Set BackLight
+```
+{
+  "method": "light",
+  "switch": 0   // 1 = backlight on
+}
+```
+
+##### Response
+```
+{
+  "method": "light",
+  "status": true
+}
+```
+---
+
+
 #### Clear Screen
 ```
 {
@@ -67,4 +85,3 @@ python3 run.py
   "status": true
 }
 ```
-----

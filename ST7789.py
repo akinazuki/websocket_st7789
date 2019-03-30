@@ -33,6 +33,9 @@ class ST7789(object):
         GPIO.output(self._dc, GPIO.HIGH)
         self._spi.writebytes([val])
 
+    def backlight(self, status):
+        GPIO.output(self._bl, status)
+
     def Init(self):
         """Initialize dispaly"""    
         self.reset()
