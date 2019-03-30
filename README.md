@@ -11,6 +11,11 @@ pip install websocket-server RPi.GPIO Pillow spidev numpy wiringpi
 python3 run.py
 ```
 
+### Demo
+
+![DEMO.jpg](https://i.loli.net/2019/03/30/5c9f34370d76d.jpg)
+
+
 ### Key Event
 
 ```
@@ -46,7 +51,7 @@ python3 run.py
 ```
 ---
 
-Clear Screen
+#### Clear Screen
 ```
 {
   "method": "clear"
